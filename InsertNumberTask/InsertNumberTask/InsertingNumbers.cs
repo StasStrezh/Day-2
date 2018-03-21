@@ -31,19 +31,10 @@ namespace InsertNumberTask
                 throw new ArgumentException();
             }
 
-            var array1 = new BitArray(new int[] { num1 });
-            var array2 = new BitArray(new int[] { num2 });
-
-            int q = 0;
-            for (int w = i; i <= j; i++, j++)
-            {
-                array1[w] = array1[w] | array2[j];
-            }
-
-            int[] array3 = new int[1];
-            array1.CopyTo(array3, 0);
-            return array3[0];
+            int arr1 = ((num1 >> j) << (i + j)) | ((int.MaxValue >> 30 - i) & num1);
+            int arr2 = (num2 << i + 1) & (int.MaxValue >> 30 - j);
+            int arr3 = arr1 | arr2;
+            return arr3;
         }
     }
 }
-
