@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static InsertNumberTask.InsertingNumbers;
+using InsertNumberTask;
 
-namespace InsertNumberTests
+namespace InsertNumberTask
 {
     [TestClass]
     public class NumberTest
@@ -10,42 +10,32 @@ namespace InsertNumberTests
         [TestMethod]
         public void TestingInsertNumber1()
         {
-            int number1 = 15;
-            int number2 = 15;
-            int i = 0;
-            int j = 0;
-            int expected = 15;
-
-            int actual = InsertNumber(number1, number2, i, j);
-            Assert.AreEqual(expected, actual);
+            int actual = InsertingNumbers.InsertNumber(15, 15, 0, 0);
+            Assert.AreEqual(15, actual);
         }
 
         [TestMethod]
         public void TestingInsertNumber2()
         {
-            int number1 = 8;
-            int number2 = 15;
-            int i = 0;
-            int j = 0;
-            int expected = 9;
-
-            int actual = InsertNumber(number1, number2, i, j);
-            Assert.AreEqual(expected, actual);
+            int actual = InsertingNumbers.InsertNumber(8, 15, 0, 0);
+            Assert.AreEqual(9, actual);
         }
 
         [TestMethod]
         public void TestingInsertNumber3()
         {
-            int number1 = 8;
-            int number2 = 15;
-            int i = 3;
-            int j = 8;
-            int expected = 120;
-
-            int actual = InsertNumber(number1, number2, i, j);
-            Assert.AreEqual(expected, actual);
+            int actual = InsertingNumbers.InsertNumber(8, 15, 3, 8);
+            Assert.AreEqual(120, actual);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestCase1_OutOfRange()
+        => InsertingNumbers.InsertNumber(8, 15, -7, 0);
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestCase2_OutOfRange()
+        => InsertingNumbers.InsertNumber(8, 15, 7, 1);
     }
 }
